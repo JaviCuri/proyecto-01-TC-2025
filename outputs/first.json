@@ -1,0 +1,11 @@
+{
+    "S": ["id", "System", "ε"],
+    "STMT": ["id", "System"],
+    "ASSIGN": ["id"],
+    "PRINT": ["System"],
+    "EXPR": ["(", "id", "num"],
+    "EXPR'": ["+", "-", "ε"],
+    "TERM": ["(", "id", "num"],
+    "TERM'": ["*", "/", "%", "ε"],
+    "FACTOR": ["(", "id", "num"]
+}
