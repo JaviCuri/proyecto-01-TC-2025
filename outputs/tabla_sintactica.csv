@@ -1,0 +1,36 @@
+NonTerminal,Terminal,Production
+S,id,"S → STMT S"
+S,System,"S → STMT S"
+S,$,"S → ε"
+
+STMT,id,"STMT → ASSIGN ;"
+STMT,System,"STMT → PRINT ;"
+
+ASSIGN,id,"ASSIGN → id = EXPR"
+
+PRINT,System,"PRINT → System . out . println ( EXPR )"
+
+EXPR,(,"EXPR → TERM EXPR'"
+EXPR,id,"EXPR → TERM EXPR'"
+EXPR,num,"EXPR → TERM EXPR'"
+
+EXPR',+,"EXPR' → + TERM EXPR'"
+EXPR',-,"EXPR' → - TERM EXPR'"
+EXPR',), "EXPR' → ε"
+EXPR',;,"EXPR' → ε"
+
+TERM,(,"TERM → FACTOR TERM'"
+TERM,id,"TERM → FACTOR TERM'"
+TERM,num,"TERM → FACTOR TERM'"
+
+TERM',*,"TERM' → * FACTOR TERM'"
+TERM',/,"TERM' → / FACTOR TERM'"
+TERM',%,"TERM' → % FACTOR TERM'"
+TERM',+,"TERM' → ε"
+TERM',-,"TERM' → ε"
+TERM',), "TERM' → ε"
+TERM',;,"TERM' → ε"
+
+FACTOR,(,"FACTOR → ( EXPR )"
+FACTOR,id,"FACTOR → id"
+FACTOR,num,"FACTOR → num"
