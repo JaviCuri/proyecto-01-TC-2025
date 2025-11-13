@@ -1,0 +1,29 @@
+G(L) = (V, Σ, P, S)
+
+V = { S, STMT, ASSIGN, PRINT, EXPR, TERM, FACTOR }
+
+Σ = { id, num, =, +, -, *, /, %, (, ), ;, System, ., out, println }
+
+Producciones P:
+
+1. S → STMT S | ε
+
+2. STMT → ASSIGN ;
+3. STMT → PRINT ;
+
+4. ASSIGN → id = EXPR
+
+5. PRINT → System . out . println ( EXPR )
+
+6. EXPR → EXPR + TERM
+7. EXPR → EXPR - TERM
+8. EXPR → TERM
+
+9. TERM → TERM * FACTOR
+10. TERM → TERM / FACTOR
+11. TERM → TERM % FACTOR
+12. TERM → FACTOR
+
+13. FACTOR → ( EXPR )
+14. FACTOR → id
+15. FACTOR → num
