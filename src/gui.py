@@ -189,25 +189,78 @@ class TCApp:
         self.write(f"\n🟧 Resultado final: {'✔ Válida' if valid else '❌ Inválida'}\n")
 
     # ==============================================================
+        # ==============================================================
+    # NUEVA VENTANA PARA EXPRESIÓN MANUAL (MULTILÍNEA)
+    # ==============================================================
     def analyze_manual_expression(self):
         win = tk.Toplevel(self.root)
-        win.title("Ingresar expresión")
-        win.geometry("400x180")
+        win.title("Ingresar expresión manual")
+        win.geometry("600x400")
         win.configure(bg=self.bg)
 
-        tk.Label(win, text="Ingrese la expresión:", fg=self.text, bg=self.bg, font=("Segoe UI", 11)).pack(pady=10)
-        entry = tk.Entry(win, width=40, font=("Segoe UI", 12), bg=self.panel, fg=self.text, insertbackground=self.text)
-        entry.pack()
+        # Título
+        tk.Label(
+            win,
+            text="Ingrese una o varias expresiones Java:",
+            fg=self.text,
+            bg=self.bg,
+            font=("Segoe UI", 12, "bold")
+        ).pack(pady=10)
 
-        def run():
-            expr = entry.get().strip()
-            if expr:
-                self.write("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-                self.write(f"\n📝 Expresión manual:\n{expr}")
-                self.show_expression("Manual", expr)
-                win.destroy()
+        # Contenedor para el text + scrollbar
+        text_frame = tk.Frame(win, bg=self.bg)
+        text_frame.pack(fill="both", expand=True, padx=15)
 
-        ttk.Button(win, text="Analizar", command=run).pack(pady=15)
+        text_scroll = ttk.Scrollbar(text_frame, orient="vertical")
+        text_widget = tk.Text(
+            text_frame,
+            width=60,
+            height=12,
+            font=("Consolas", 12),
+            bg=self.panel,
+            fg=self.text,
+            insertbackground=self.text,
+            yscrollcommand=text_scroll.set,
+            relief="flat",
+            wrap="none"
+        )
+        text_scroll.config(command=text_widget.yview)
+
+        text_scroll.pack(side="right", fill="y")
+        text_widget.pack(side="left", fill="both", expand=True)
+
+        # Botones inferiores
+        btn_frame = tk.Frame(win, bg=self.bg)
+        btn_frame.pack(pady=15)
+
+        def run_analysis():
+            raw_text = text_widget.get("1.0", tk.END).strip()
+            if not raw_text:
+                messagebox.showwarning("Advertencia", "Ingrese una o más expresiones.")
+                return
+
+            # Dividir expresiones por línea
+            lines = [line.strip() for line in raw_text.split("\n") if line.strip()]
+
+            # Mostrar encabezado en el panel principal
+            self.write("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            self.write("📝 Expresiones ingresadas manualmente:")
+
+            # Analizar cada línea por separado
+            for idx, line in enumerate(lines, start=1):
+                self.show_expression(f"Manual {idx}", line)
+
+        ttk.Button(
+            btn_frame,
+            text="Analizar",
+            command=run_analysis
+        ).grid(row=0, column=0, padx=10)
+
+        ttk.Button(
+            btn_frame,
+            text="Cerrar",
+            command=win.destroy
+        ).grid(row=0, column=1, padx=10)
 
     # ==============================================================
     def clear_output(self):
