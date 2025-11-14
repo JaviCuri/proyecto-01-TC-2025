@@ -6,6 +6,7 @@ Año: **2025**
 ---
 
 ## 1. Introducción
+
 Este software implementa un analizador sintáctico LL(1) para un subconjunto del lenguaje Java. Permite:
 
 - Analizar expresiones aritméticas y asignaciones simples.
@@ -20,10 +21,12 @@ Este software implementa un analizador sintáctico LL(1) para un subconjunto del
 ## 2. Requisitos del Sistema
 
 ### Software requerido
+
 - Python **3.9+**
 - Tkinter (incluido en Windows/macOS; en Linux instalar manualmente)
 
 ### Sistemas soportados
+
 - Windows 10/11
 - Linux (Ubuntu, Arch, etc.)
 - macOS
@@ -31,6 +34,7 @@ Este software implementa un analizador sintáctico LL(1) para un subconjunto del
 ---
 
 ## 3. Estructura del Proyecto
+
 ```
 proyecto-01-TC-2025/
 │── input/
@@ -39,7 +43,8 @@ proyecto-01-TC-2025/
 │── outputs/
 │     ├── first.json
 │     ├── tabla_sintactica.csv
-│
+│     ├── gramatica_sin_recursion.txt
+│     ├── gramatica_original.txt
 │── src/
 │     ├── gui.py
 │     ├── parser_ll1.py
@@ -47,12 +52,12 @@ proyecto-01-TC-2025/
 │     ├── main.py
 │
 │── informe/
-│     └── proyecto1.pdf
 ```
 
 ---
 
 ## 4. Cómo ejecutar el programa
+
 Desde la raíz del proyecto, ejecutar:
 
 ```bash
@@ -66,6 +71,7 @@ python src/gui.py
 ### Botones principales
 
 #### 📂 Seleccionar archivo Java
+
 Permite abrir un archivo `.java`; el sistema analiza automáticamente:
 
 - asignaciones
@@ -73,6 +79,7 @@ Permite abrir un archivo `.java`; el sistema analiza automáticamente:
 - llamadas `println`
 
 #### ✏️ Analizar expresión manual
+
 Permite ingresar una expresión como:
 
 ```
@@ -81,6 +88,7 @@ System.out.println(a);
 ```
 
 #### 🧹 Limpiar pantalla
+
 Elimina toda la salida previa.
 
 ---
@@ -111,18 +119,17 @@ Permite ingresar cualquier expresión soportada, mostrando:
 
 ## 8. Posibles errores y soluciones
 
-| Mensaje | Explicación | Solución |
-|--------|-------------|----------|
-| *Error sintáctico: se esperaba X* | La expresión no cumple la gramática | Revisar formato y operadores |
-| *No se encontraron expresiones válidas* | El archivo no contiene líneas analizables | Usar otro archivo |
-| *La GUI no inicia* | Tkinter no está instalado | Instalar Tkinter |
+| Mensaje                                 | Explicación                               | Solución                     |
+| --------------------------------------- | ----------------------------------------- | ---------------------------- |
+| _Error sintáctico: se esperaba X_       | La expresión no cumple la gramática       | Revisar formato y operadores |
+| _No se encontraron expresiones válidas_ | El archivo no contiene líneas analizables | Usar otro archivo            |
+| _La GUI no inicia_                      | Tkinter no está instalado                 | Instalar Tkinter             |
 
 ---
 
 ## 9. Información del Autor
 
-- **Estudiante:** Javier Curipan  
-- **Curso:** INFO1148 – Teoría de la Computación  
-- **Semestre:** II – 2025  
+- **Estudiante:** Javier Curipan Espinoza
+- **Curso:** INFO1148 – Teoría de la Computación
+- **Semestre:** II – 2025
 - **Profesor:** Marcos Lévano
-
