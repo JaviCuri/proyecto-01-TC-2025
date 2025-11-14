@@ -9,10 +9,8 @@ class DarkStyle:
     def apply(self, root):
         style = ttk.Style(root)
 
-        # Tema base
         style.theme_use("default")
 
-        # COLORES BASE
         bg = "#0f0f0f"
         bg_darker = "#0a0a0a"
         panel = "#161b22"
@@ -22,10 +20,8 @@ class DarkStyle:
         orange = "#f78166"
         border = "#30363d"
 
-        # ROOT
         root.configure(bg=bg)
 
-        # General ttk config
         style.configure(
             ".", 
             background=bg,
@@ -36,7 +32,6 @@ class DarkStyle:
             font=("Segoe UI", 10)
         )
 
-        # Buttons
         style.configure(
             "TButton",
             background=blue_dark,
@@ -54,11 +49,9 @@ class DarkStyle:
             foreground=[("active", "#ffffff")]
         )
 
-        # Frames
         style.configure("DarkFrame.TFrame", background=bg)
         style.configure("Panel.TFrame", background=panel)
 
-        # Treeview
         style.configure(
             "Treeview",
             background=panel,
@@ -99,7 +92,6 @@ class TCApp:
         self.blue = "#58a6ff"
         self.orange = "#f78166"
 
-        # HEADER
         header = tk.Frame(root, bg=self.bg)
         header.pack(fill="x", pady=10)
 
@@ -187,11 +179,7 @@ class TCApp:
             table.insert("", "end", values=(step["pila"], step["entrada"], step["prod"]))
 
         self.write(f"\n🟧 Resultado final: {'✔ Válida' if valid else '❌ Inválida'}\n")
-
-    # ==============================================================
-        # ==============================================================
-    # NUEVA VENTANA PARA EXPRESIÓN MANUAL (MULTILÍNEA)
-    # ==============================================================
+        
     def analyze_manual_expression(self):
         win = tk.Toplevel(self.root)
         win.title("Ingresar expresión manual")
@@ -228,8 +216,6 @@ class TCApp:
 
         text_scroll.pack(side="right", fill="y")
         text_widget.pack(side="left", fill="both", expand=True)
-
-        # Botones inferiores
         btn_frame = tk.Frame(win, bg=self.bg)
         btn_frame.pack(pady=15)
 
@@ -239,14 +225,9 @@ class TCApp:
                 messagebox.showwarning("Advertencia", "Ingrese una o más expresiones.")
                 return
 
-            # Dividir expresiones por línea
             lines = [line.strip() for line in raw_text.split("\n") if line.strip()]
-
-            # Mostrar encabezado en el panel principal
             self.write("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
             self.write("📝 Expresiones ingresadas manualmente:")
-
-            # Analizar cada línea por separado
             for idx, line in enumerate(lines, start=1):
                 self.show_expression(f"Manual {idx}", line)
 
@@ -262,12 +243,10 @@ class TCApp:
             command=win.destroy
         ).grid(row=0, column=1, padx=10)
 
-    # ==============================================================
     def clear_output(self):
         for w in self.output_frame.winfo_children():
             w.destroy()
 
-    # ==============================================================
     def write(self, text):
         tk.Label(
             self.output_frame,

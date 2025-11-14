@@ -1,14 +1,13 @@
 import re
 
-# Palabras clave y símbolos que usaremos
 KEYWORDS = {"System", "out", "println"}
 SYMBOLS = {"=", "+", "-", "*", "/", "%", "(", ")", ";", ".", ","}
 
 TOKEN_REGEX = re.compile(r"""
-    ([A-Za-z_][A-Za-z0-9_]*)   |   # identificadores / palabras
-    (\d+)                      |   # números
-    (==|!=|<=|>=|&&|\|\|)      |   # (no usados, pero por si acaso)
-    ([=+\-*/%();.,])               # símbolos simples
+    ([A-Za-z_][A-Za-z0-9_]*)   |  
+    (\d+)                      |  
+    (==|!=|<=|>=|&&|\|\|)      |   
+    ([=+\-*/%();.,])               
 """, re.VERBOSE)
 
 
@@ -30,7 +29,6 @@ def tokenize_line(line: str):
         elif num is not None:
             tokens.append("num")
         elif op_long is not None:
-            # No lo usamos en esta gramática, pero lo dejamos
             tokens.append(op_long)
         elif sym is not None:
             tokens.append(sym)

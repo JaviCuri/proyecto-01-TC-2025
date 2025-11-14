@@ -67,7 +67,7 @@ def parse_tokens(tokens, return_log=False, return_steps=False):
     """
 
     log = ""
-    trace_steps = []  # lista de dicts: [{"pila": ..., "entrada": ..., "prod": ...}]
+    trace_steps = []  
 
     def add(msg):
         nonlocal log
@@ -157,7 +157,6 @@ def parse_tokens(tokens, return_log=False, return_steps=False):
                 else:
                     return False
 
-        # Guardar el paso
         if return_steps:
             trace_steps.append({
                 "pila": pila_str,
@@ -165,7 +164,6 @@ def parse_tokens(tokens, return_log=False, return_steps=False):
                 "prod": prod_str
             })
 
-        # Aceptación
         if top == ENDMARK and current == ENDMARK:
             add("\n🎉 Análisis completado: la cadena es válida según la gramática.")
 
@@ -178,7 +176,6 @@ def parse_tokens(tokens, return_log=False, return_steps=False):
             else:
                 return True
 
-    # Entrada sin consumir
     add("❌ No se pudo completar el análisis.")
     if return_steps and return_log:
         return log, False, trace_steps
